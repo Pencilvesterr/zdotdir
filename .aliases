@@ -36,10 +36,17 @@ alias urlencode='python3 -c "import sys, urllib.parse as ul; \
 
 # misc
 alias please=sudo
-alias zshrc='${EDITOR:-vim} "${ZDOTDIR:-$HOME}"/.zshrc'
-alias zbench='for i in {1..10}; do /usr/bin/time zsh -lic exit; done'
+alias zshrc='code "${ZDOTDIR:-$HOME}"/.zshrc'
 alias zdot='cd ${ZDOTDIR:-~}'
 
+# -------------------------------------------------------------------
+# Updating built-ins
+# -------------------------------------------------------------------
+eval $(thefuck --alias)
+# Use oxide instead of cd
+alias cd=z
+# Use bat instead of cat
+alias cat=bat
 # -------------------------------------------------------------------
 # Alias Commands
 # -------------------------------------------------------------------
@@ -54,12 +61,8 @@ alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
 
-# cd, because typing the backslash sucks
-alias .='cd ../'
-alias ..='cd ../../'
-alias ...='cd ../../../'
-alias ....='cd ../../../../'
-
+alias python='python3'
+alias pip='pip3'
 # -------------------------------------------------------------------
 # Git
 # -------------------------------------------------------------------
@@ -75,9 +78,9 @@ alias gc='git checkout'
 alias gra='git remote add'
 alias grr='git remote rm'
 alias gpu='git pull'
-# Useful for large repos as only pulls changes for that one branch 
+# Useful for large repos as only pulls changes for that one branch
 # Instead of a full fetch
-alias gpo='git pull origin' 
+alias gpo='git pull origin'
 alias gcl='git clone'
 alias gta='git tag -a -m'
 alias gf='git reflog'
@@ -88,13 +91,13 @@ alias gbranches='git reflog | grep checkout | cut -d " " -f 8 | uniq | head ${1}
 # -------------------------------------------------------------------
 # Use to notify when a terminal command finished. e.g. `la -a; notifyDone`
 alias notifyDone='tput bel; terminal-notifier -title "Terminal" -message "Done with task! Exit status: $?"' -activate com.apple.Terminal
-# Lazy way to carefree push 
+# TODO: Maybe move these to the functions dir?
+# Lazy way to carefree push
 function forward-remote() {
   echo "Port forwarding to devenv"
   ssh -N -L localhost:5433:localhost:5433 -L localhost:8080:localhost:8080 -L localhost:8880:localhost:8880 -L localhost:5005:localhost:5005 -L localhost:5432:localhost:5432 -L localhost:32769:localhost:32769 -L localhost:8099:localhost:8099 -L localhost:8100:localhost:8100 devenv
   # ssh -N -L localhost:5005:localhost:5005 devenv
 }
-
 function startup() {
   # TODO: Edit this, I don't think I need it anymore
   cd ~/dev/jira/jira-sparse
@@ -113,5 +116,3 @@ function get_docker_write_perms() {
   docker login docker.atl-paas.net
   atlas packages permission grant
 }
-
-eval $(thefuck --alias) 
