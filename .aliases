@@ -77,42 +77,12 @@ alias gb='git branch'
 alias gc='git checkout'
 alias gra='git remote add'
 alias grr='git remote rm'
-alias gpu='git pull'
+alias gpu='git pull'		
 # Useful for large repos as only pulls changes for that one branch
 # Instead of a full fetch
 alias gpo='git pull origin'
 alias gcl='git clone'
 alias gta='git tag -a -m'
 alias gf='git reflog'
-alias gbranches='git reflog | grep checkout | cut -d " " -f 8 | uniq | head ${1} | cat -n'
-
-# -------------------------------------------------------------------
-# Custom functions
-# -------------------------------------------------------------------
-# Use to notify when a terminal command finished. e.g. `la -a; notifyDone`
-alias notifyDone='tput bel; terminal-notifier -title "Terminal" -message "Done with task! Exit status: $?"' -activate com.apple.Terminal
-# TODO: Maybe move these to the functions dir?
-# Lazy way to carefree push
-function forward-remote() {
-  echo "Port forwarding to devenv"
-  ssh -N -L localhost:5433:localhost:5433 -L localhost:8080:localhost:8080 -L localhost:8880:localhost:8880 -L localhost:5005:localhost:5005 -L localhost:5432:localhost:5432 -L localhost:32769:localhost:32769 -L localhost:8099:localhost:8099 -L localhost:8100:localhost:8100 devenv
-  # ssh -N -L localhost:5005:localhost:5005 devenv
-}
-function startup() {
-  # TODO: Edit this, I don't think I need it anymore
-  cd ~/dev/jira/jira-sparse
-  echo "--- Starting Docker"
-  open -a Docker
-  echo "--- Fetching Jira"
-  git fetch
-  echo "--- Getting remote session"
-  atlas devenv remote acquire --atl-debug # --instance-type=c6i.8xlarge
-#   echo "--- Doing first explore build"
-#   jsync build ./jmake run explore
-}
-
-function get_docker_write_perms() {
-  # https://hello.atlassian.net/wiki/spaces/~613032943/pages/1726867368/How+to+use+Atlassian+Docker+Registry
-  docker login docker.atl-paas.net
-  atlas packages permission grant
-}
+alias gbranches='git reflog | grep checkout | cut -d '\'' '\'' -f 8 | awk '\''!seen[$0]++'\'' | head ${1} | cat -n'
+alias glog='git log --graph --oneline --all'

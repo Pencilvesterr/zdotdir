@@ -16,6 +16,7 @@ agkozak/zsh-z
 
 
 $ZDOTDIR/.aliases
+$ZDOTDIR/.aliases_work
 
 # Setup prompt
 romkatv/powerlevel10k 
