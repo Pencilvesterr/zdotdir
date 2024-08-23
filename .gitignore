@@ -1,5 +1,5 @@
 ### .gitignore
-
+.idea
 .antidote/
 .zcompcache/
 .zsh_sessions/
@@ -12,3 +12,4 @@
 *.zwc
 *.zwc.old
 ~*
+.DS_Store
