@@ -30,11 +30,15 @@ Clone this project to `$ZDOTDIR`, and then make a symlink to `.zshenv`.
 ZDOTDIR=~/.config/zsh
 git clone https://github.com/Pencilvesterr/zdotdir $ZDOTDIR
 
-# symlink .zshenv
+# Soft link .zshenv
 [[ -f ~/.zshenv ]] && mv -f ~/.zshenv ~/.zshenv.bak
 ln -s $ZDOTDIR/.zshenv ~/.zshenv
 
-# symlink .zshrc
+# Soft link .vimrc
+[[ -f ~/.vimrc ]] && mv -f ~/.vimrc ~/.vimrc.bak
+ln -s $ZDOTDIR/.vimrc ~/.vimrc
+
+# Soft link .zshrc
 [[ -f ~/.zshrc ]] && mv -f ~/.zshrc ~/.zshrc.bak
 ln -s $ZDOTDIR/.zshrc ~/.zshrc
 
